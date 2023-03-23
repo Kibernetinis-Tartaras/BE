@@ -3,7 +3,7 @@
     // to be updated when authentiacation is figured out
     public class StravaCredentials
     {
-        public Guid AuthenticationId { get; set; }
+        public long AuthenticationId { get; set; }
 
         public string? Password { get; set; }
     }
