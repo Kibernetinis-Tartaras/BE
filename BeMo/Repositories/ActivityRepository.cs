@@ -2,7 +2,7 @@
 using BeMo.Models;
 using BeMo.Repositories;
 
-namespace BeMo.Models;
+namespace BeMo.Repositories;
 
 public class ActivityRepository : IRepository<Activity>
 {
@@ -18,31 +18,31 @@ public class ActivityRepository : IRepository<Activity>
         return await _context.Activity.ToListAsync();
     }
 
-    public Task<Activity?> GetByPropertyAsync(Expression<Func<Activity, bool>> propertyCondition)
+    public Task<Activity?> GetByPropertyAsync(Expression<Func<Activity, bool>> predicate)
     {
-        return _context.Activity.FirstOrDefaultAsync(propertyCondition);
+        return _context.Activity.FirstOrDefaultAsync(predicate);
     }
 
-    public Task<bool> ExistsByPropertyAsync(Expression<Func<Activity, bool>> propertyCondition)
+    public Task<bool> ExistsByPropertyAsync(Expression<Func<Activity, bool>> predicate)
     {
-        return _context.Activity.AnyAsync(propertyCondition);
+        return _context.Activity.AnyAsync(predicate);
     }
 
-    public async Task InsertAsync(Activity modelToInsert)
+    public async Task InsertAsync(Activity model)
     {
-        await _context.Activity.AddAsync(modelToInsert);
+        await _context.Activity.AddAsync(model);
         await _context.Instance.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Activity modelToUpdate)
+    public async Task UpdateAsync(Activity model)
     {
-        _context.Activity.Update(modelToUpdate);
+        _context.Activity.Update(model);
         await _context.Instance.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Activity modelToDelete)
+    public async Task DeleteAsync(Activity model)
     {
-        _context.Activity.Remove(modelToDelete);
+        _context.Activity.Remove(model);
         await _context.Instance.SaveChangesAsync();
     }
 }

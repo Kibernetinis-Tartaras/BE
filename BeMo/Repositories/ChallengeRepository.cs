@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using BeMo.Models;
 using BeMo.Repositories;
 
-namespace BeMo.DataAccess;
+namespace BeMo.Repositories;
 
 public class ChallengeRepository : IRepository<Challenge>
 {
@@ -21,31 +21,31 @@ public class ChallengeRepository : IRepository<Challenge>
         return await _context.Challenge.ToListAsync();
     }
 
-    public Task<Challenge?> GetByPropertyAsync(Expression<Func<Challenge, bool>> propertyCondition)
+    public Task<Challenge?> GetByPropertyAsync(Expression<Func<Challenge, bool>> predicate)
     {
-        return _context.Challenge.FirstOrDefaultAsync(propertyCondition);
+        return _context.Challenge.FirstOrDefaultAsync(predicate);
     }
 
-    public Task<bool> ExistsByPropertyAsync(Expression<Func<Challenge, bool>> propertyCondition)
+    public Task<bool> ExistsByPropertyAsync(Expression<Func<Challenge, bool>> predicate)
     {
-        return _context.Challenge.AnyAsync(propertyCondition);
+        return _context.Challenge.AnyAsync(predicate);
     }
 
-    public async Task InsertAsync(Challenge modelToInsert)
+    public async Task InsertAsync(Challenge model)
     {
-        await _context.Challenge.AddAsync(modelToInsert);
+        await _context.Challenge.AddAsync(model);
         await _context.Instance.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Challenge modelToUpdate)
+    public async Task UpdateAsync(Challenge model)
     {
-        _context.Challenge.Update(modelToUpdate);
+        _context.Challenge.Update(model);
         await _context.Instance.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(Challenge modelToDelete)
+    public async Task DeleteAsync(Challenge model)
     {
-        _context.Challenge.Remove(modelToDelete);
+        _context.Challenge.Remove(model);
         await _context.Instance.SaveChangesAsync();
     }
 }

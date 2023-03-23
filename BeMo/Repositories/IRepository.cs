@@ -6,13 +6,13 @@ public interface IRepository<T> where T : class
 {
     public Task<IEnumerable<T>> GetAllAsync();
 
-    public Task<T?> GetByPropertyAsync(Expression<Func<T, bool>> propertyCondition);
+    public Task<T?> GetByPropertyAsync(Expression<Func<T, bool>> predicate);
 
-    public Task<bool> ExistsByPropertyAsync(Expression<Func<T, bool>> propertyCondition);
+    public Task<bool> ExistsByPropertyAsync(Expression<Func<T, bool>> predicate);
 
-    public Task InsertAsync(T modelToInsert);
+    public Task InsertAsync(T model);
 
-    public Task UpdateAsync(T modelToUpdate);
+    public Task UpdateAsync(T model);
 
-    public Task DeleteAsync(T modelToDelete);
+    public Task DeleteAsync(T model);
 }
