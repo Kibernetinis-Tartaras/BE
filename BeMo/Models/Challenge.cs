@@ -8,9 +8,7 @@
 
         public ActivityType Type { get; set; }
 
-
         public List<Admin> Admins = new();
-
         
         public List<ChallengeUser> Users = new();
 

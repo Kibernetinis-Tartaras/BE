@@ -18,8 +18,5 @@
         public int Weight { get; set; }
 
         public List<Activity> Activities = new();
-
-
-
     }
 }
