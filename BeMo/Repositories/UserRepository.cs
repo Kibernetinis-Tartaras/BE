@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using BeMo.Data;
 using BeMo.Models;
-using BeMo.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeMo.Repositories;
