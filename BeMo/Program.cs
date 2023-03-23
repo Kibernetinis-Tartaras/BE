@@ -1,9 +1,16 @@
+using BeMo.Data;
+using BeMo.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<BeMoContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("BeMoContext") ??
+                      throw new InvalidOperationException("Connection string 'BeMoContext' not found.")));
 
+// Add services to the container.
+builder.Services.AddHostedService<RefreshStravaTokensRepeatingService>();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

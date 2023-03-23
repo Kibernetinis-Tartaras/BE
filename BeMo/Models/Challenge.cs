@@ -1,10 +1,13 @@
-﻿namespace BeMo.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BeMo.Models
 {
     public class Challenge
     {
-        public Guid Id { get; set; }
+        [JsonIgnore]
+        public long Id { get; set; }
 
-        public string? Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public ActivityType Type { get; set; }
 

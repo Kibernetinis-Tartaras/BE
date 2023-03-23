@@ -1,18 +1,20 @@
-﻿namespace BeMo.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BeMo.Models
 {
     public class Activity
     {
-    public int Id { get; set; }
+        [JsonIgnore]
+        public int Id { get; set; }
 
-    public int Distance { get; set; }
+        public int Distance { get; set; }
 
-    public ActivityType Type { get; set; }
+        public ActivityType Type { get; set; }
 
-    public DateTime Start { get; set; }
+        public DateTime Start { get; set; }
 
-    // This one we might calculate from start and end, since it is not included in the response of the StravaAPI
-    public DateTime End { get; set; }
+        public DateTime End { get; set; }
 
-    public int Elapsed { get; set; }
+        public int Elapsed { get; set; }
     }
 }

@@ -1,9 +1,20 @@
-﻿namespace BeMo.Models
+﻿using System.Text.Json.Serialization;
+
+namespace BeMo.Models
 {
     public class Admin
     {
-        public Guid UserId { get; set; }
+        [JsonIgnore]
+        public int Id { get; set; }
 
-        public Guid ChallengeId { get; set; }
+        [JsonIgnore]
+        public long UserId { get; set; }
+
+        public User User { get; set; } = null!;
+
+        [JsonIgnore]
+        public long ChallengeId { get; set; }
+
+        public Challenge Challenge { get; set; } = null!;
     }
 }
