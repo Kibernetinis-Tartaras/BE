@@ -6,6 +6,8 @@
         public long Id { get; set; }
 
         public string? Name { get; set; }
+
+        public string StravaId { get; set; }
         
         public string? Email { get; set; }
 
@@ -13,9 +15,9 @@
 
         public string? Phone { get; set; }
 
-        public StravaCredentials? StravaCredentials { get; set; }
+        public int StravaCredentialsId { get; set; }
 
-        public int Weight { get; set; }
+        public StravaCredentials? StravaCredentials { get; set; }
 
         public List<Activity> Activities = new();
     }

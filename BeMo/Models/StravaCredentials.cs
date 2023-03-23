@@ -8,8 +8,8 @@ namespace BeMo.Models
         [JsonIgnore]
         public long Id { get; set; }
 
-        public long AuthenticationId { get; set; }
+        public long RefreshToken { get; set; }
 
-        public string? Password { get; set; }
+        private string AuthenticationToken { get; set; }
     }
 }
