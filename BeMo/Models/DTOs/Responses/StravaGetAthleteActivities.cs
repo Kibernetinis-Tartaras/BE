@@ -1,10 +1,5 @@
 ﻿namespace BeMo.Models.DTOs.Responses
 {
-    public class StravaGetAthleteActivitiesResponse
-    {
-        public List<StravaActivityResponse> activities { get; set; } = null!;
-    }
-
     public class StravaActivityResponse
     {
         public long elapsed_time { get; set; }
