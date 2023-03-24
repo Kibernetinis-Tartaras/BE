@@ -17,6 +17,7 @@ namespace BeMo.Extensions
             services.AddScoped<IRepository<Activity>, ActivityRepository>();
 
             services.AddHostedService<RefreshStravaTokensRepeatingService>();
+            services.AddHostedService<RetrieveStravaDataRepeatingService>();
         }
     }
 }
