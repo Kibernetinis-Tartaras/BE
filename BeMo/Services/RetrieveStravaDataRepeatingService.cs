@@ -60,7 +60,7 @@ namespace BeMo.Services
                     {
                         try
                         {
-                            int activitiesRetrieved;
+                            int activitiesRetrieved = 0;
 
                             var pageNumber = 0;
                             var before = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -82,9 +82,7 @@ namespace BeMo.Services
 
                                 var responseBody = await result.Content.ReadAsStringAsync();
 
-                                var response = JsonConvert.DeserializeObject<StravaGetAthleteActivitiesResponse>(responseBody) ?? throw new JsonSerializationException("Wrong response object type retrieved");
-
-                                var activities = response.activities;
+                                var activities = JsonConvert.DeserializeObject<List<StravaActivityResponse>>(responseBody) ?? throw new JsonSerializationException("Wrong response object type retrieved");
 
                                 activitiesRetrieved = activities.Count;
 
@@ -114,6 +112,7 @@ namespace BeMo.Services
                                     activity.MaxSpeed = activityResponse.max_speed;
                                     activity.StartDate = activityResponse.start_date;
                                     activity.EndDate = activityResponse.start_date.AddSeconds(activityResponse.elapsed_time);
+                                    activity.UserId = user.Id;
 
                                     await _activityRepository.InsertAsync(activity);
                                 }
@@ -122,7 +121,7 @@ namespace BeMo.Services
 
                             user.LastActivitySync = DateTime.UtcNow;
 
-                            await _userRepository.InsertAsync(user);
+                            await _userRepository.UpdateAsync(user);
                         }
                         catch (Exception e)
                         {
