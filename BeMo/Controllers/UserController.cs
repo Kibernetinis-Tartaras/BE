@@ -18,7 +18,7 @@ namespace BeMo.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost(Name = "login")]
+        [HttpPost]
         [Route("login")]
         public async Task<ActionResult<LoginResponse>> Login(LoginRequest _request)
         {
