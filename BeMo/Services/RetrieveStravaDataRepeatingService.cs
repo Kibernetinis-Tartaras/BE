@@ -16,16 +16,12 @@ namespace BeMo.Services
 
         private readonly ILogger<RefreshStravaTokensRepeatingService> _logger;
 
-        private readonly StravaOptions _stravaOptions;
-
         public RetrieveStravaDataRepeatingService(
             ILogger<RefreshStravaTokensRepeatingService> logger,
-            IServiceProvider serviceProvider,
-            IOptions<StravaOptions> stravaOptions)
+            IServiceProvider serviceProvider)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
-            _stravaOptions = stravaOptions.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -67,13 +63,15 @@ namespace BeMo.Services
                             int activitiesRetrieved;
 
                             var pageNumber = 0;
-                            var before = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                            var after = new DateTimeOffset(user.LastActivitySync).ToUnixTimeMilliseconds();
+                            var before = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+                            var after = new DateTimeOffset(user.LastActivitySync).ToUnixTimeSeconds();
                             var per_page = StravaConstants.ActivitiesPerRequest;
+
                             do
                             {
                                 pageNumber++;
                                 string parameteres = $"?before={before}&after={after}&page={pageNumber}&per_page={per_page}";
+                                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", user.AccessToken);
 
                                 var result = await _httpClient.GetAsync(String.Concat(dataURL, parameteres));
 
