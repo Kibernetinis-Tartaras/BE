@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace BeMo.Repositories;
+namespace BeMo.Repositories.Interfaces;
 
 public interface IRepository<T> where T : class
 {

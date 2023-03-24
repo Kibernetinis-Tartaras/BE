@@ -12,6 +12,10 @@ builder.Services.AddDbContext<BeMoContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("BeMoContext") ??
                       throw new InvalidOperationException("Connection string 'BeMoContext' not found.")));
 
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddScoped<IRepository<Challenge>, ChallengeRepository>();
+builder.Services.AddScoped<IRepository<Activity>, ActivityRepository>();
+
 // Add services to the container.
 builder.Services.AddHostedService<RefreshStravaTokensRepeatingService>();
 builder.Services.AddControllers();
