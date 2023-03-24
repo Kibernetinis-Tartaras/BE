@@ -1,20 +1,29 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BeMo.Models
+﻿namespace BeMo.Models
 {
     public class Activity
     {
-        [JsonIgnore]
         public int Id { get; set; }
+
+        public int UserId { get; set; }
+
+        public User User { get; set; } = null!;
 
         public int Distance { get; set; }
 
-        public ActivityType Type { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public DateTime Start { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public DateTime End { get; set; }
+        public TimeSpan Elapsed { get; set; }
 
-        public int Elapsed { get; set; }
+        public TimeSpan FastestKilometer { get; set; }
+
+        public int ElevationGain { get; set; }
+
+        public double MaxSpeed { get; set; }
+
+        public double AverageSpeed { get; set; }
+
+        public ActivityType ActivityType { get; set; }
     }
 }
