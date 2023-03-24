@@ -58,7 +58,6 @@ namespace BeMo.Services
 
                 foreach (User user in users)
                 {
-                    List<Task> tasks = new List<Task>();
                     if (user.RefreshToken is not null)
                     {
                         try

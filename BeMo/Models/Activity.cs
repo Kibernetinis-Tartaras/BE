@@ -8,7 +8,7 @@
 
         public User User { get; set; } = null!;
 
-        public int Distance { get; set; }
+        public double Distance { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -16,9 +16,7 @@
 
         public TimeSpan Elapsed { get; set; }
 
-        public TimeSpan FastestKilometer { get; set; }
-
-        public int ElevationGain { get; set; }
+        public double ElevationGain { get; set; }
 
         public double MaxSpeed { get; set; }
 
