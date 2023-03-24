@@ -2,23 +2,20 @@
 {
     public class User
     {
+        public int Id { get; set; }
 
-        public long Id { get; set; }
+        public string FirstName { get; set; } = null!;
 
-        public string? Name { get; set; }
+        public string LastName { get; set; } = null!;
 
-        public string StravaId { get; set; }
-        
-        public string? Email { get; set; }
+        public long StravaUserId { get; set; }
 
-        public string? Surname { get; set; }
+        public string Username { get; set; } = null!;
 
-        public string? Phone { get; set; }
+        public string RefreshToken { get; set; } = null!;
 
-        public int StravaCredentialsId { get; set; }
+        public string AccessToken { get; set; } = null!;
 
-        public StravaCredentials? StravaCredentials { get; set; }
-
-        public List<Activity> Activities = new();
+        public string Password { get; set; } = null!;
     }
 }
