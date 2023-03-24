@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using BeMo.Data;
 using Microsoft.EntityFrameworkCore;
+using BeMo.Repositories.Interfaces;
 
 namespace BeMo.Repositories;
 
