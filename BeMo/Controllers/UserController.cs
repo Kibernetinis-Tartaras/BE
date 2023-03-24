@@ -19,6 +19,7 @@ namespace BeMo.Controllers
         }
 
         [HttpPost(Name = "login")]
+        [Route("login")]
         public async Task<ActionResult<LoginResponse>> Login(LoginRequest _request)
         {
             var user = await _userRepository.GetByPropertyAsync(x => x.Username == _request.username);
@@ -36,7 +37,8 @@ namespace BeMo.Controllers
             return new LoginResponse { userId = user.Id };
         }
 
-        [HttpPost(Name = "register")]
+        [HttpPost]
+        [Route("register")]
         public async Task<ActionResult> Register(RegisterRequest _request)
         {
             if (await _userRepository.ExistsByPropertyAsync( x => x.Username == _request.username))
