@@ -18,7 +18,6 @@ namespace BeMo.Controllers
             _repository = repository;
         }
 
-
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<string>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -29,7 +28,7 @@ namespace BeMo.Controllers
             bool challengeExists;
             try
             {
-               challengeExists = await _repository.ExistsByPropertyAsync(x => x.id == challengePostRequest.id);
+               challengeExists = await _repository.ExistsByPropertyAsync(x => x.Id == challengePostRequest.id);
             }
             catch (Exception)
             {
