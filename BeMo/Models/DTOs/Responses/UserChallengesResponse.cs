@@ -1,6 +1,6 @@
-﻿namespace BeMo.Models
+﻿namespace BeMo.Models.DTOs.Responses
 {
-    public class Challenge
+    public class UserChallengesResponse
     {
         public int Id { get; set; }
 
@@ -14,8 +14,9 @@
 
         public DateTime EndDate { get; set; }
 
-        // navigation
-
-        public List<User_Challenge> User_Challenges { get; set; } = null!;
+        public static implicit operator UserChallengesResponse?(Challenge? v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace BeMo.Extensions
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Challenge>, ChallengeRepository>();
             services.AddScoped<IRepository<Activity>, ActivityRepository>();
+            services.AddScoped<IUserChallengeRepository, User_ChallengeRepository>();
 
             services.AddHostedService<RefreshStravaTokensRepeatingService>();
             services.AddHostedService<RetrieveStravaDataRepeatingService>();

@@ -20,10 +20,9 @@ namespace BeMo.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<string>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost("Create")]
-        public async Task<ActionResult<ChallengeResponse>> Create(ChallengePostRequest challengePostRequest)
+        public async Task<ActionResult<ChallengePostResponse>> Create(ChallengePostRequest challengePostRequest)
         {
             bool challengeExists;
             try
@@ -35,7 +34,7 @@ namespace BeMo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            if (challengeExists is true) return NotFound($"Challenge with the Id={challengePostRequest.id} is already added");
+            if (challengeExists is true) return BadRequest($"Challenge with the Id={challengePostRequest.id} is already added");
 
             Challenge challenge = new Challenge
             {
@@ -56,12 +55,34 @@ namespace BeMo.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            ChallengeResponse challengeResponse = new ChallengeResponse
+            ChallengePostResponse challengeResponse = new ChallengePostResponse
             {
                 success = true,
             };
 
             return Ok(challengeResponse);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(List<string>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("GetById")]
+        public async Task<ActionResult<Challenge>> GetById(ObjectGetByIdRequest ObjectGetByIdRequest)
+        {
+            Challenge? challenge;
+            try
+            {
+                challenge = await _repository.GetByPropertyAsync(x => x.Id == ObjectGetByIdRequest.Id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            if (challenge is null) return NotFound($"Challenge with the Id={ObjectGetByIdRequest.Id} was not found!");
+
+            return Ok(challenge);
         }
     }
 }
