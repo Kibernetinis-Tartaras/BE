@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using BeMo.Models;
+using System.Linq.Expressions;
 
 namespace BeMo.Repositories.Interfaces;
 

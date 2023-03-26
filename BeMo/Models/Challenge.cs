@@ -13,5 +13,8 @@
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        // Navigation
+        public List<User_Challenge> User_Challenges { get; set; } = null!;
     }
 }

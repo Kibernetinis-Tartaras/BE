@@ -19,5 +19,8 @@
         public string Password { get; set; } = null!;
 
         public DateTime LastActivitySync { get; set; } = DateTime.UtcNow;
+
+        // Navigation
+        public List<User_Challenge> User_Challenges { get; set; } = null!;
     }
 }
