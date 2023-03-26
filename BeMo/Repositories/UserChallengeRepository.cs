@@ -8,7 +8,6 @@ namespace BeMo.Repositories
 {
     public class User_ChallengeRepository: IUserChallengeRepository
     {
-
         private readonly IBeMoContext _context;
 
         public User_ChallengeRepository(IBeMoContext context)

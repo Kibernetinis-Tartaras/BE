@@ -52,7 +52,6 @@ namespace BeMo.Controllers
 
                     challengesResponses.Add(challenge);
                 }
-
             }
             catch (Exception)
             {
