@@ -68,9 +68,9 @@ namespace BeMo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("GetById")]
-        public async Task<ActionResult<Challenge>> GetById(ObjectGetByIdRequest ObjectGetByIdRequest)
+        public async Task<ActionResult<ChallengeResponse>> GetById([FromQuery] ObjectGetByIdRequest ObjectGetByIdRequest)
         {
-            Challenge? challenge;
+            ChallengeResponse? challenge;
             try
             {
                 challenge = await _repository.GetByPropertyAsync(x => x.Id == ObjectGetByIdRequest.Id);

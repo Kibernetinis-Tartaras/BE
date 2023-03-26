@@ -24,12 +24,11 @@ namespace BeMo.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [HttpPost("userChallenges")]
-        public async Task<ActionResult<IEnumerable<UserChallengesResponse>>> GetAllUserChallenges(ObjectGetByIdRequest ObjectGetByIdRequest)
+        [HttpGet("userChallenges")]
+        public async Task<ActionResult<IEnumerable<ChallengeResponse>>> GetAllUserChallenges([FromQuery] ObjectGetByIdRequest ObjectGetByIdRequest)
         {
             IEnumerable<User_Challenge>? userChallengeRelationships;
-            IList<Challenge> challenges = new List<Challenge>();
-            IList<UserChallengesResponse> challengesResponses = new List<UserChallengesResponse>();
+            IList<ChallengeResponse> challengesResponses = new List<ChallengeResponse>();
 
             try
             {
@@ -46,21 +45,12 @@ namespace BeMo.Controllers
             {
                 foreach (var relationship in userChallengeRelationships)
                 {
-                    var challenge = await _challengeRepository.GetByPropertyAsync(x => x.Id == relationship.ChallengeId);
+                    ChallengeResponse? challenge = await _challengeRepository.GetByPropertyAsync(x => x.Id == relationship.ChallengeId);
 
-                    // if challenge is null something is really fucked here
+                    // if challenge is null here - something is really fucked
                     if (challenge == null) return StatusCode(StatusCodes.Status500InternalServerError);
 
-                    UserChallengesResponse response = new UserChallengesResponse
-                    {
-                        Id = challenge.Id,
-                        Name = challenge.Name,
-                        Type = challenge.Type,
-                        IsPublic = challenge.IsPublic,
-                        StartDate = challenge.StartDate,
-                        EndDate = challenge.EndDate,
-                    };
-                    challengesResponses.Add(response);
+                    challengesResponses.Add(challenge);
                 }
 
             }

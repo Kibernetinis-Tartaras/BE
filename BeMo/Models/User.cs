@@ -20,8 +20,7 @@
 
         public DateTime LastActivitySync { get; set; } = DateTime.UtcNow;
 
-        // navigation
-
+        // Navigation
         public List<User_Challenge> User_Challenges { get; set; } = null!;
     }
 }
